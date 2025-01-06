@@ -2,7 +2,9 @@ from inputs import devices
 from inputs import get_gamepad
 import time
 from threading import Thread
-from robot_library import Robot
+import sys
+sys.path.append('../galatae-api/')
+from robot import Robot
 
 buttons=["ABS_X","ABS_Y","ABS_RX","ABS_RY","BTN_DPAD_LEFT","BTN_DPAD_RIGHT","BTN_DPAD_DOWN","BTN_DPAD_UP","BTN_WEST","BTN_EAST","BTN_SOUTH","BTN_NORTH","BTN_SELECT","BTN_START"]
 
@@ -55,7 +57,7 @@ def ps_control(initialize_robot):
     time.sleep(3)
     r.reset_pos()
     print("start calibration")
-    r.calibrate_gripper()
+    #r.calibrate_gripper()
     print("cal ok")
     r.go_to_point([400,0,0,180,0])
 
