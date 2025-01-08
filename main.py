@@ -54,7 +54,7 @@ def ps_control(initialize_robot):
   number_of_jog_buttons=8
 
   if(initialize_robot):
-    time.sleep(3)
+    #time.sleep(3)
     r.reset_pos()
     print("start calibration")
     r.calibrate_gripper()
@@ -76,7 +76,7 @@ def ps_control(initialize_robot):
       gripper_is_open=True
     elif(joystick_pos[12]==1):
         print("Go to foetus pos")
-        r.got_to_foetus_pos()
+        r.go_to_foetus_pos()
 
     time.sleep(0.001)
 
