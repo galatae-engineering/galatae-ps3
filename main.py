@@ -39,8 +39,8 @@ def get_jog_dir():
   jog_dir[0]=joystick_pos[1]*abs_speed
   jog_dir[1]=joystick_pos[0]*abs_speed
   jog_dir[2]=-joystick_pos[3]*abs_speed
-  jog_dir[3]=(joystick_pos[4]-joystick_pos[5])*btn_speed
-  jog_dir[4]=(joystick_pos[7]-joystick_pos[6])*btn_speed
+  jog_dir[3]=(joystick_pos[7]-joystick_pos[6])*btn_speed
+  jog_dir[4]=(joystick_pos[4]-joystick_pos[5])*btn_speed
   
   return jog_dir
 
@@ -59,7 +59,7 @@ def ps_control(initialize_robot):
     print("start calibration")
     r.calibrate_gripper()
     print("cal ok")
-    r.go_to_point([400,0,0,180,0])
+    r.go_to_point([400,0,50,180,0])
 
   r.set_joint_speed(100)
   print("ready!")
