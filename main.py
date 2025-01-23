@@ -30,8 +30,8 @@ def updateJoystickValues():
           joystick_pos[index]=event.state
     time.sleep(0.001)
 
-def get_jog_dir():
-  jog_dir=[0] * 5
+def get_jog_dir(gripper_is_open):
+  jog_dir=[0] * 6
 
   abs_speed=1
   btn_speed=0.5
@@ -41,6 +41,9 @@ def get_jog_dir():
   jog_dir[2]=-joystick_pos[3]*abs_speed
   jog_dir[3]=(joystick_pos[7]-joystick_pos[6])*btn_speed
   jog_dir[4]=(joystick_pos[4]-joystick_pos[5])*btn_speed
+  jog_dir[5]=0.0
+  if(not gripper_is_open):
+    jog_dir[5]=0.0
   
   return jog_dir
 
@@ -67,7 +70,7 @@ def ps_control(initialize_robot):
   while True:
     if not all(x == 0 or x == 0.0 for x in joystick_pos[:number_of_jog_buttons]):
       print(joystick_pos)
-      r.jog(get_jog_dir())
+      r.jog(get_jog_dir(gripper_is_open))
     elif(joystick_pos[10]==1):
       r.close_gripper(0)
       gripper_is_open=False
