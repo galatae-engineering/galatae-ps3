@@ -69,10 +69,10 @@ def ps_control(initialize_robot):
 
   while True:
     if not all(x == 0 or x == 0.0 for x in joystick_pos[:number_of_jog_buttons]):
-      print(joystick_pos)
+      #print(joystick_pos)
       r.jog(get_jog_dir(gripper_is_open))
     elif(joystick_pos[10]==1):
-      r.close_gripper(0)
+      r.close_gripper()
       gripper_is_open=False
     elif(joystick_pos[11]==1 and not gripper_is_open):
       r.open_gripper()
@@ -81,7 +81,9 @@ def ps_control(initialize_robot):
         print("Go to foetus pos")
         r.go_to_foetus_pos()
 
-    time.sleep(0.001)
+    #print("a")
+
+    time.sleep(0.0001)
 
 def check_ps_buttons():
   while True:	# loop for ever
