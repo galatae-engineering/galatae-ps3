@@ -60,7 +60,7 @@ def ps_control(initialize_robot):
     #time.sleep(3)
     r.reset_pos()
     print("start calibration")
-    r.calibrate_gripper()
+    #r.calibrate_gripper()
     print("cal ok")
     r.go_to_point([400,0,50,180,0])
 
