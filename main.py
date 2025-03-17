@@ -1,10 +1,11 @@
-from inputs import devices
+#from inputs import devices
 from inputs import get_gamepad
 import time
 from threading import Thread
 import sys
 sys.path.append('../galatae-api/')
 from robot import Robot
+import math
 
 buttons=["ABS_X","ABS_Y","ABS_RX","ABS_RY","BTN_DPAD_LEFT","BTN_DPAD_RIGHT","BTN_DPAD_DOWN","BTN_DPAD_UP","BTN_WEST","BTN_EAST","BTN_SOUTH","BTN_NORTH","BTN_SELECT","BTN_START"]
 
@@ -48,28 +49,27 @@ def get_jog_dir(gripper_is_open):
   return jog_dir
 
 
-def ps_control(initialize_robot):
+def ps_control():
   r=Robot('/dev/ttyACM0')
+  #r.set_tool([0,0,0])
   thread=Thread(target=updateJoystickValues)
   thread.start()
 
   gripper_is_open=True
   number_of_jog_buttons=8
 
-  if(initialize_robot):
-    #time.sleep(3)
-    r.reset_pos()
-    print("start calibration")
-    #r.calibrate_gripper()
-    print("cal ok")
-    r.go_to_point([400,0,50,180,0])
+  r.reset_pos()
+  r.set_joint_speed(20)
 
-  r.set_joint_speed(100)
+  print("start calibration")
+  #r.calibrate_gripper()
+  print("cal ok")
+  r.go_to_point([400,0,50,180,0])
+
   print("ready!")
 
   while True:
     if not all(x == 0 or x == 0.0 for x in joystick_pos[:number_of_jog_buttons]):
-      #print(joystick_pos)
       r.jog(get_jog_dir(gripper_is_open))
     elif(joystick_pos[10]==1):
       r.close_gripper()
@@ -92,7 +92,7 @@ def check_ps_buttons():
         print(event.code,": ",event.state)
         
 def main():
-  ps_control(1)
+  ps_control()
   #check_ps_buttons()
   #test()
 
