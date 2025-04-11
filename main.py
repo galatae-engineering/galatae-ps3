@@ -59,7 +59,7 @@ def ps_control():
   number_of_jog_buttons=8
 
   r.reset_pos()
-  r.set_joint_speed(20)
+  r.set_joint_speed(50)
 
   print("start calibration")
   r.calibrate_gripper()
