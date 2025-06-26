@@ -62,7 +62,7 @@ def ps_control():
   r.set_joint_speed(50)
 
   print("start calibration")
-  #r.calibrate_gripper()
+  r.calibrate_gripper()
   print("cal ok")
   r.go_to_point([400,0,150,180,0])
 
@@ -82,7 +82,7 @@ def ps_control():
         r.go_to_foetus_pos()
 
     #print lz position du robot
-    r.get_pose()
+    #r.get_pose()
     time.sleep(0.0001)
 
 def check_ps_buttons():
