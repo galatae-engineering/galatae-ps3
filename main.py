@@ -34,7 +34,7 @@ def updateJoystickValues():
 def get_jog_dir(gripper_is_open):
   jog_dir=[0] * 6
 
-  abs_speed=1
+  abs_speed=2
   btn_speed=0.5
 
   jog_dir[0]=joystick_pos[1]*abs_speed
@@ -62,7 +62,7 @@ def ps_control():
   r.set_joint_speed(50)
 
   print("start calibration")
-  r.calibrate_gripper()
+  #r.calibrate_gripper()
   print("cal ok")
   r.go_to_point([400,0,150,180,0])
 
