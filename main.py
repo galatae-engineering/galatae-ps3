@@ -50,21 +50,21 @@ def get_jog_dir(gripper_is_open):
 
 
 def ps_control():
-  r=Robot('/dev/ttyACM0')
+  r=Robot('/dev/ttyACM0',True)
   #r.set_tool([0,0,0])
   thread=Thread(target=updateJoystickValues)
   thread.start()
 
   gripper_is_open=True
   number_of_jog_buttons=8
+  start_pose=[400,0,150,180,0]
 
-  r.reset_pos()
   r.set_joint_speed(50)
 
   print("start calibration")
   #r.calibrate_gripper()
   print("cal ok")
-  r.go_to_point([400,0,150,180,0])
+  r.go_to_point(start_pose)
 
   print("ready!")
 
@@ -78,8 +78,9 @@ def ps_control():
       r.open_gripper()
       gripper_is_open=True
     elif(joystick_pos[12]==1):
-        print("Go to foetus pos")
-        r.go_to_foetus_pos()
+      r.go_to_foetus_pos()
+    elif(joystick_pos[13]==1):
+      r.go_to_point(start_pose)
 
     #print lz position du robot
     #r.get_pose()
