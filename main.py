@@ -50,7 +50,7 @@ def get_jog_dir(gripper_is_open):
 
 
 def ps_control():
-  r=Robot(True)
+  r=Robot(False)
   #r.set_tool([0,0,0])
   thread=Thread(target=updateJoystickValues)
   thread.start()
@@ -70,6 +70,7 @@ def ps_control():
   while True:
     if not all(x == 0 or x == 0.0 for x in joystick_pos[:number_of_jog_buttons]):
       r.jog(get_jog_dir(gripper_is_open))
+      print(r.get_tool_pose())
     elif(joystick_pos[10]==1):
       r.close_gripper()
       gripper_is_open=False
